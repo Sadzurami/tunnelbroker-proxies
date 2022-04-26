@@ -195,7 +195,7 @@ done
 
 ####
 echo "● Setting up /etc/rc.local"
-rm /etc/rc.local
+rm -f /etc/rc.local
 cat >/etc/rc.local <<END
 #!/bin/bash
 
