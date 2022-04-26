@@ -113,7 +113,7 @@ make install
 rm -f ~/ndppd/ndppd.conf
 cat >>~/ndppd/ndppd.conf <<END
 route-ttl 30000
-proxy eth0 {
+proxy he-ipv6 {
    router no
    timeout 500
    ttl 30000
