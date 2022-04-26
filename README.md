@@ -33,6 +33,7 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/Quick-IPv6
 3. Install the script on your server with [one simple command](https://github.com/Sadzurami/Quick-IPv6Proxy-Installer/blob/main/README.md#installation)
    ![example.png](./src-docs/example.png)
 4. After installation, the server will be rebooted
+5. The list of tunnels is located in your home directory (~/tunnels.txt)
 
 # Requirements
 
