@@ -170,7 +170,7 @@ done
 
 CURRENT_PROXY_PORT=${PROXY_START_PORT}
 for e in $(cat ~/ip.list); do
-    echo "$([ $PROXY_PROTOCOL == "socks5" ] && echo "socks" || echo "proxy") -6 -n -a -p$CURRENT_PROXY_PORT -i$HOST_IPV4_ADDR -e$e" >>~/3proxy/3proxy.cfg
+    echo "$([ $PROXY_PROTOCOL == "socks5" ] && echo "socks" || echo "proxy") -6 -s0 -n -a -p$CURRENT_PROXY_PORT -i$HOST_IPV4_ADDR -e$e" >>~/3proxy/3proxy.cfg
     echo "$PROXY_PROTOCOL://$HOST_IPV4_ADDR:$CURRENT_PROXY_PORT$([ "$PROXY_LOGIN" ] && echo ":$PROXY_LOGIN:$PROXY_PASS" || echo "")" >>~/tunnels.txt
     let "CURRENT_PROXY_PORT+=1"
 done
@@ -196,7 +196,7 @@ sleep 5
 exit 0
 
 END
-chmod +x /etc/rc.local
+/bin/chmod +x /etc/rc.local
 
 ####
 echo "● Finishing and rebooting"
