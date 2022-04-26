@@ -104,6 +104,26 @@ UserTasksMax=1000000
 END
 
 ####
+echo "● Setting up ndppd"
+cd ~
+git clone https://github.com/DanielAdolfsson/ndppd.git
+cd ~/ndppd
+make all
+make install
+rm -f ~/ndppd/ndppd.conf
+cat >>~/ndppd/ndppd.conf <<END
+route-ttl 30000
+proxy eth0 {
+   router no
+   timeout 500
+   ttl 30000
+   rule ${PROXY_NETWORK}::/${PROXY_NET_MASK} {
+      static
+   }
+}
+END
+
+####
 echo "● Setting up 3proxy"
 cd ~
 wget --no-check-certificate https://github.com/z3APA3A/3proxy/archive/0.8.13.tar.gz
@@ -115,9 +135,6 @@ touch src/define.txt
 echo "#define ANONYMOUS 1" >src/define.txt
 sed -i '31r src/define.txt' src/proxy.h
 make -f Makefile.Linux
-
-####
-echo "● Setting up 3proxy.cfg"
 cat >~/3proxy/3proxy.cfg <<END
 #!/bin/bash
 daemon
@@ -177,6 +194,7 @@ done
 
 ####
 echo "● Setting up /etc/rc.local"
+rm /etc/rc.local
 cat >/etc/rc.local <<END
 #!/bin/bash
 
@@ -192,6 +210,8 @@ sleep 5
 /sbin/ip tunnel add he-ipv6 mode sit remote ${TUNNEL_IPV4_ADDR} local ${HOST_IPV4_ADDR} ttl 255
 /sbin/ip link set he-ipv6 up
 /sbin/ip -6 route add 2000::/3 dev he-ipv6
+~/ndppd/ndppd -d -c ~/ndppd/ndppd.conf
+sleep 2
 ~/3proxy/src/3proxy ~/3proxy/3proxy.cfg
 exit 0
 
