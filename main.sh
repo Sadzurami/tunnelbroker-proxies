@@ -137,6 +137,7 @@ sed -i '31r src/define.txt' src/proxy.h
 make -f Makefile.Linux
 cat >~/3proxy/3proxy.cfg <<END
 #!/bin/bash
+
 daemon
 maxconn 10000
 nserver 1.1.1.1
