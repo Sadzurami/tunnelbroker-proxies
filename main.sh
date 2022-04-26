@@ -8,7 +8,6 @@ else
 fi
 
 ####
-
 echo "↓ Routed IPv6 Prefix (*:*:*::/*):"
 read PROXY_NETWORK
 
