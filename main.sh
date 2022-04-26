@@ -61,55 +61,50 @@ echo "● Selected: $PROXY_PROTOCOL"
 
 ####
 PROXY_NETWORK=$(echo $PROXY_NETWORK | awk -F:: '{print $1}')
-echo "● Selected: Network = $PROXY_NETWORK"
-echo "● Selected: Network Mask = $PROXY_NET_MASK"
+echo "● Selected: Network=$PROXY_NETWORK"
+echo "● Selected: Network Mask=$PROXY_NET_MASK"
 HOST_IPV4_ADDR=$(hostname -I | awk '{print $1}')
-echo "● Selected: Host IPv4 address = $HOST_IPV4_ADDR"
+echo "● Selected: Host IPv4 address=$HOST_IPV4_ADDR"
 
 ####
 echo "● Updating packages and installing dependencies"
-sleep 2
 apt-get update
 apt-get -y install gcc g++ make bc pwgen git
 
 ####
 echo "● Setting up /etc/sysctl.conf"
-sleep 2
 cat >>/etc/sysctl.conf <<END
-net.ipv6.conf.all.proxy_ndp = 1
-net.ipv6.conf.default.forwarding = 1
-net.ipv6.conf.all.forwarding = 1
-net.ipv6.ip_nonlocal_bind = 1
-net.ipv6.route.max_size = 409600
-net.ipv4.tcp_max_syn_backlog = 4096
-net.ipv6.neigh.default.gc_thresh3 = 102400
-kernel.threads-max = 1200000
-kernel.max_map_count = 6000000
-vm.max_map_count = 6000000
-kernel.pid_max = 2000000
+net.ipv6.conf.eth0.proxy_ndp=1
+net.ipv6.conf.all.proxy_ndp=1
+net.ipv6.conf.default.forwarding=1
+net.ipv6.conf.all.forwarding=1
+net.ipv6.ip_nonlocal_bind=1
+net.ipv4.ip_local_port_range=1024 64000
+net.ipv6.route.max_size=409600
+net.ipv4.tcp_max_syn_backlog=4096
+net.ipv6.neigh.default.gc_thresh3=102400
+kernel.threads-max=1200000
+kernel.max_map_count=6000000
+vm.max_map_count=6000000
+kernel.pid_max=2000000
 END
 
 ####
 echo "● Setting up /etc/systemd/logind.conf"
-sleep 2
-cat >>/etc/systemd/logind.conf <<END
-UserTasksMax = 1000000
-END
+echo "UserTasksMax=1000000" >>/etc/systemd/logind.conf
 
 ####
 echo "● Setting up /etc/systemd/system.conf"
-sleep 2
 cat >>/etc/systemd/system.conf <<END
-UserTasksMax = 1000000
-DefaultMemoryAccounting = no
-DefaultTasksAccounting = no
-DefaultTasksMax = 1000000
-UserTasksMax = 1000000
+UserTasksMax=1000000
+DefaultMemoryAccounting=no
+DefaultTasksAccounting=no
+DefaultTasksMax=1000000
+UserTasksMax=1000000
 END
 
 ####
 echo "● Setting up 3proxy"
-sleep 2
 cd ~
 wget --no-check-certificate https://github.com/z3APA3A/3proxy/archive/0.8.13.tar.gz
 tar xzf 0.8.13.tar.gz
@@ -123,15 +118,16 @@ make -f Makefile.Linux
 
 ####
 echo "● Setting up 3proxy.cfg"
-sleep 2
 cat >~/3proxy/3proxy.cfg <<END
 #!/bin/bash
 daemon
-maxconn 64000
+maxconn 10000
+nserver 1.1.1.1
 nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
+stacksize 6000
 flush
 END
 
@@ -149,7 +145,6 @@ fi
 
 ####
 echo "● Generating $PROXY_COUNT IPv6 addresses"
-sleep 2
 touch ~/ip.list
 touch ~/tunnels.txt
 
@@ -182,15 +177,16 @@ done
 
 ####
 echo "● Setting up /etc/rc.local"
-sleep 2
 cat >/etc/rc.local <<END
 #!/bin/bash
+
 ulimit -n 600000
 ulimit -u 600000
 ulimit -i 1200000
 ulimit -s 1000000
 ulimit -l 200000
 /sbin/ip addr add ${PROXY_NETWORK}::/${PROXY_NET_MASK} dev he-ipv6
+sleep 5
 /sbin/ip -6 route add default via ${PROXY_NETWORK}::1
 /sbin/ip -6 route add local ${PROXY_NETWORK}::/${PROXY_NET_MASK} dev lo
 /sbin/ip tunnel add he-ipv6 mode sit remote ${TUNNEL_IPV4_ADDR} local ${HOST_IPV4_ADDR} ttl 255
@@ -198,10 +194,10 @@ ulimit -l 200000
 /sbin/ip -6 route add 2000::/3 dev he-ipv6
 ~/3proxy/src/3proxy ~/3proxy/3proxy.cfg
 exit 0
+
 END
 chmod +x /etc/rc.local
 
 ####
 echo "● Finishing and rebooting"
-sleep 5
 reboot now
