@@ -1,11 +1,13 @@
 #!/bin/bash
 
-if [[ping6 -c3 google.com &>/dev/null]]; then
+if ping6 -c3 google.com &>/dev/null; then
     echo "Your server is ready to set up IPv6 proxies!"
 else
     echo "Your server can't connect to IPv6 addresses"
     exit 1
 fi
+
+####
 
 echo "↓ Routed IPv6 Prefix (*:*:*::/*):"
 read PROXY_NETWORK
