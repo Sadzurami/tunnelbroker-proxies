@@ -129,6 +129,7 @@ cd ~
 wget --no-check-certificate https://github.com/z3APA3A/3proxy/archive/0.8.13.tar.gz
 tar xzf 0.8.13.tar.gz
 mv ~/3proxy-0.8.13 ~/3proxy
+rm 0.8.13.tar.gz
 cd ~/3proxy
 chmod +x src/
 touch src/define.txt
