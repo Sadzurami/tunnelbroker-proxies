@@ -110,8 +110,7 @@ git clone https://github.com/DanielAdolfsson/ndppd.git
 cd ~/ndppd
 make all
 make install
-rm -f ~/ndppd/ndppd.conf
-cat >>~/ndppd/ndppd.conf <<END
+cat >~/ndppd/ndppd.conf <<END
 route-ttl 30000
 proxy he-ipv6 {
    router no
@@ -195,7 +194,6 @@ done
 
 ####
 echo "● Setting up /etc/rc.local"
-rm -f /etc/rc.local
 cat >/etc/rc.local <<END
 #!/bin/bash
 
