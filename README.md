@@ -38,7 +38,7 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/IPv6ProxyI
 # Requirements
 
 -   Debian based os (tested: Debian 9-11, Ubuntu 18-22)
--   1 CPU, 256mb RAM
+-   1 CPU, 256 MB RAM
 -   The ability to connect to ipv6 addresses
     -   Check: `ping6 -c3 google.com &>/dev/null && echo "Connected successfully" || echo "Connection error"`
 
