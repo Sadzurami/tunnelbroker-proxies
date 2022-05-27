@@ -48,10 +48,8 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/IPv6ProxyI
 -   [ndppd](https://github.com/DanielAdolfsson/ndppd)
 -   some guides from https://blog.vpsville.ru/blog
 
-# Questions and suggestions
+# Suggestions
 
 If you have any questions or suggestions, please contact me:
 
 -   Email: mail.to.sadzurami@gmail.com
--   Telegram: https://t.me/sadzurami
--   Discord: Sadzurami#3140
