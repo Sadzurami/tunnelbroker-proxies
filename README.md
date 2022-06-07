@@ -53,3 +53,5 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/IPv6ProxyI
 If you have any suggestions, please contact me:
 
 -   Email: mail.to.sadzurami@gmail.com
+
+Please don't spam me with questions.
