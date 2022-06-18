@@ -12,7 +12,7 @@ The script establishes 6to4 tunnels. You connect to your server's ipv4 address o
 -   Connection protocols: `http(s)` / `socks5`
 -   Authentication by username and password (or w/o auth)
 -   Custom port numbering (from start)
--   Simultaneous online over 60000 proxies (\*max tcp connections = 10000)
+-   Simultaneous online over 60000 proxies
 -   Minor resource usage (1000 online proxies = ~ 50mb ram)
 -   Auto generating tunnels list in uri format
 
