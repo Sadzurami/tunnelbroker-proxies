@@ -1,6 +1,6 @@
 # Quick IPv6-Proxy Installer
 
-A simple shell script for deploying your owns IPv6 proxies vie tunnelbroker.
+A simple shell script for deploying your owns IPv6 proxies via tunnelbroker.
 
 # How it works
 
