@@ -147,7 +147,7 @@ cat >~/3proxy/3proxy.cfg <<END
 #!/bin/bash
 
 daemon
-maxconn 10000
+maxconn 100
 nserver 1.1.1.1
 nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
