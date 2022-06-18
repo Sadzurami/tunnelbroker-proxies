@@ -64,9 +64,8 @@ if [[ PROXY_PROTOCOL != "socks5" ]]; then
 fi
 
 ####
-sleep 1
 clear
-echo "Selected:"
+sleep 1
 PROXY_NETWORK=$(echo $PROXY_NETWORK | awk -F:: '{print $1}')
 echo "● Network: $PROXY_NETWORK"
 echo "● Network Mask: $PROXY_NET_MASK"
