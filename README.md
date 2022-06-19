@@ -14,7 +14,7 @@ The script establishes 6to4 tunnels. You connect to your server's ipv4 address o
 -   Custom port numbering (from start)
 -   Simultaneous online over 60000 proxies
 -   Minor resource usage (1000 online proxies = ~ 50mb ram)
--   Auto generating tunnels list in uri format
+-   Auto generating tunnels list
 
 ##
 
