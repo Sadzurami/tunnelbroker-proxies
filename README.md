@@ -25,8 +25,7 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/tunnelbrok
 # How to start
 
 0. Create account on https://tunnelbroker.net
-1. Prepare your own server with a Debian based os.
-   It's much better if you only use the server for your proxies and nothing more, because this script changes some system configurations that may affect your other applications. Cheap VPS servers are a great choice.
+1. Prepare your own server with a Debian based os. It's much better if you only use the server for your proxies and nothing more, because this script changes some system configurations that may affect your other applications. Cheap VPS servers are a great choice. There is no guarantee that the script will work with your cloud provider. For example, it does not work with Vultr. I have tested several cloud providers and had no problems using them, now I have settled on [Hetzner](https://hetzner.cloud/?ref=u773sH3Kq8gw).
 2. [Create Regular Tunnel](https://tunnelbroker.net/tunnel_detail.php?tid=762030#:~:text=Create%20Regular%20Tunnel)
 3. Install the script on your server with [one simple command](https://github.com/Sadzurami/tunnelbroker-proxies/blob/main/README.md#installation)
 4. After installation, the server will be rebooted
