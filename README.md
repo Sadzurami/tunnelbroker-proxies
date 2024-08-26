@@ -18,7 +18,7 @@ The script establishes 6to4 tunnels. You connect to your server's ipv4 address o
 
 # Installation
 
-```
+```sh
 sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/tunnelbroker-proxies/main/main.sh)"
 ```
 
@@ -35,8 +35,10 @@ sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Sadzurami/tunnelbrok
 
 -   Debian based os (tested: Debian 9-11, Ubuntu 18-22)
 -   1 CPU, 256 MB RAM
--   The ability to connect to ipv6 addresses
-    -   Check: `ping6 -c3 google.com &>/dev/null && echo "Connected successfully" || echo "Connection error"`
+-   The ability to connect to ipv6 addresses. You can check it with:
+  ```sh
+ping6 -c3 google.com &>/dev/null && echo "Connected successfully" || echo "Connection error"
+```
 
 # Used
 
